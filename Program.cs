@@ -27,6 +27,34 @@ class Program()
 {
     static void Main()
     {
-        
+        Console.WriteLine("Moment 3!"); 
+        //generell kod för programmet 
     }
-}
+
+    static void CheckArgs() 
+    {
+        //kontrollerar argument och på vad som ska göras (visa, skapa, ta bort)
+    }
+
+    static void CreatePost()
+    {
+        //för att skapa en post. Här kontrolleras ifall all info är med.
+    } 
+
+    static void SavePost()
+    {
+        //för att spara ner i binärt eller JSON 
+    }
+
+    static void DeletePost()
+    {
+        //för att radera en post 
+    }
+
+    static void GetPosts() 
+    {
+        //hämtar posterna från där de är sparade 
+    }
+} 
+
+

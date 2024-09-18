@@ -12,3 +12,4 @@ C:\Users\stina\Moment 3 C#\obj\Debug\net8.0\refint\Moment 3 C#.dll
 C:\Users\stina\Moment 3 C#\obj\Debug\net8.0\Moment 3 C#.pdb
 C:\Users\stina\Moment 3 C#\obj\Debug\net8.0\Moment 3 C#.genruntimeconfig.cache
 C:\Users\stina\Moment 3 C#\obj\Debug\net8.0\ref\Moment 3 C#.dll
+C:\Users\stina\Moment 3 C#\obj\Debug\net8.0\Moment 3 C#.sourcelink.json

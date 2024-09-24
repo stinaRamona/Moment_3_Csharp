@@ -23,21 +23,42 @@ Efter varje genomfört menyval ska skärmen skrivas om. Rensar konsollen och sen
 
 using System; 
 
-class Program()
+class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
         Console.WriteLine("Moment 3!"); 
         //generell kod för programmet 
+
+        if(args.Length > 0)
+        {
+            int option; 
+            if(int.TryParse(args[0], out option))
+            {
+                CheckArgs(option); 
+            }
+        } 
+        else
+        {
+            Console.WriteLine("Ange ett 1 för att skapa inlägg och 2 för att ta bort inlägg");
+        }
     }
 
-    static void CheckArgs() 
+    static void CheckArgs(int option) 
     {
-        //kontrollerar argument och på vad som ska göras (visa, skapa, ta bort)
+        if(option == 1)
+        {
+            CreatePost(); 
+        }
+        else if(option == 2)
+        {
+            DeletePost(); 
+        }
     }
 
     static void CreatePost()
     {
+        Console.WriteLine("Skapa post"); 
         //för att skapa en post. Här kontrolleras ifall all info är med.
     } 
 
@@ -48,6 +69,7 @@ class Program()
 
     static void DeletePost()
     {
+        Console.WriteLine("Ta bort post"); 
         //för att radera en post 
     }
 

@@ -25,15 +25,17 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Moment 3!"); 
+        Console.WriteLine("Ange 1 för att skapa en post");
+        Console.WriteLine("Ange 2 för att radera en post"); 
+        string args = Console.ReadLine(); 
         //generell kod för programmet 
 
         if(args.Length > 0)
         {
             int option; 
-            if(int.TryParse(args[0], out option))
+            if(int.TryParse(args, out option))
             {
                 CheckArgs(option); 
             }

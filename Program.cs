@@ -29,7 +29,7 @@ class Program
     {
         Console.WriteLine("Ange 1 för att skapa en post");
         Console.WriteLine("Ange 2 för att radera en post"); 
-        string args = Console.ReadLine(); 
+        string args = Console.ReadLine()!; 
         //generell kod för programmet 
 
         if(args.Length > 0)
@@ -62,10 +62,10 @@ class Program
     {
         Console.WriteLine("SKAPA POST");
         Console.WriteLine("Skriv ditt meddelande här:"); 
-        string message = Console.ReadLine(); 
+        string message = Console.ReadLine()!; 
 
         Console.WriteLine("Skriv ditt namn här:"); 
-        string name = Console.ReadLine(); 
+        string name = Console.ReadLine()!; 
 
         if(message.Length == 0 || name.Length == 0)
         {

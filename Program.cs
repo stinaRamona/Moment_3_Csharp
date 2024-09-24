@@ -60,18 +60,33 @@ class Program
 
     static void CreatePost()
     {
-        Console.WriteLine("Skapa post"); 
+        Console.WriteLine("SKAPA POST");
+        Console.WriteLine("Skriv ditt meddelande här:"); 
+        string message = Console.ReadLine(); 
+
+        Console.WriteLine("Skriv ditt namn här:"); 
+        string name = Console.ReadLine(); 
+
+        if(message.Length == 0 || name.Length == 0)
+        {
+            Console.WriteLine("Du måste ange meddelande och namn"); 
+        }
+        else
+        {
+            SavePost(); 
+        }
         //för att skapa en post. Här kontrolleras ifall all info är med.
     } 
 
     static void SavePost()
     {
+        Console.WriteLine("sparar meddelande"); 
         //för att spara ner i binärt eller JSON 
     }
 
     static void DeletePost()
     {
-        Console.WriteLine("Ta bort post"); 
+        Console.WriteLine("TA BORT POST"); 
         //för att radera en post 
     }
 

@@ -13,7 +13,7 @@ Ett enklare menysystem ska implementeras där man väljer vad som ska göras
 
 Om man vill lägga in post ska man kunna lägga till ägare, dessa fält ska ej lämnas tomma 
 
-Man tar bort fält baserat på index på inlägget 
+Man tar bort fält baserat på index på inlägget (ska sparas som en array)
 
 Gästbokens inlägg ska serialiseras/deserialiseras samt sparas på fil antingen 
 binärt eller som json, så att tidigare inmatad data finns lagrad.

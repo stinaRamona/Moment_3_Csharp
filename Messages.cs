@@ -7,8 +7,8 @@ namespace GusetbookMessages
     //Definition av klassen
     public class Message
     {
-        public string GuestMsg = ""; 
-        public string GuestName = ""; 
+        public string GuestMsg {get; set;} 
+        public string GuestName {get; set;} 
         //Constructor
         public Message(string msg, string name)
         {

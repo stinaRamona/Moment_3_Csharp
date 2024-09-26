@@ -22,6 +22,7 @@ Efter varje genomfört menyval ska skärmen skrivas om. Rensar konsollen och sen
 */
 
 using System;
+using System.Text.Json;
 
 namespace GusetbookMessages
 {
@@ -86,6 +87,10 @@ namespace GusetbookMessages
 
             Console.WriteLine($"Meddelande: {myMessage.GuestMsg}");
             Console.WriteLine($"Av:{myMessage.GuestName}"); 
+
+            string jsonMessage = JsonSerializer.Serialize<Message>(myMessage); 
+
+            Console.WriteLine(jsonMessage); //output är tom JSON sträng
 
             //för att spara ner i binärt eller JSON 
         }

@@ -75,14 +75,17 @@ namespace GusetbookMessages
             }
             else
             {
-                SavePost();
+                SavePost(message, name);
             }
             //för att skapa en post. Här kontrolleras ifall all info är med.
         }
 
-        static void SavePost()
+        static void SavePost(string message, string name)
         {
-            Console.WriteLine("sparar meddelande");
+            Message myMessage = new Message(message, name); 
+
+            Console.WriteLine($"Meddelande: {myMessage.GuestMsg}");
+            Console.WriteLine($"Av:{myMessage.GuestName}"); 
 
             //för att spara ner i binärt eller JSON 
         }

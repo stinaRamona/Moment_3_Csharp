@@ -21,79 +21,82 @@ binärt eller som json, så att tidigare inmatad data finns lagrad.
 Efter varje genomfört menyval ska skärmen skrivas om. Rensar konsollen och sen skriver om den. 
 */
 
-using System; 
+using System;
 
-class Program
+namespace GusetbookMessages
 {
-    static void Main()
+    class Program
     {
-        Console.WriteLine("Ange 1 för att skapa en post");
-        Console.WriteLine("Ange 2 för att radera en post"); 
-        string args = Console.ReadLine()!; 
-        //generell kod för programmet 
-
-        if(args.Length > 0)
+        static void Main()
         {
-            int option; 
-            if(int.TryParse(args, out option))
+            Console.WriteLine("Ange 1 för att skapa en post");
+            Console.WriteLine("Ange 2 för att radera en post");
+            string args = Console.ReadLine()!;
+            //generell kod för programmet 
+
+            if (args.Length > 0)
             {
-                CheckArgs(option); 
+                int option;
+                if (int.TryParse(args, out option))
+                {
+                    CheckArgs(option);
+                }
             }
-        } 
-        else
+            else
+            {
+                Console.WriteLine("Ange ett 1 för att skapa inlägg och 2 för att ta bort inlägg");
+            }
+        }
+
+        static void CheckArgs(int option)
         {
-            Console.WriteLine("Ange ett 1 för att skapa inlägg och 2 för att ta bort inlägg");
+            if (option == 1)
+            {
+                CreatePost();
+            }
+            else if (option == 2)
+            {
+                DeletePost();
+            }
+        }
+
+        static void CreatePost()
+        {
+            Console.WriteLine("SKAPA POST");
+            Console.WriteLine("Skriv ditt meddelande här:");
+            string message = Console.ReadLine()!;
+
+            Console.WriteLine("Skriv ditt namn här:");
+            string name = Console.ReadLine()!;
+
+            if (message.Length == 0 || name.Length == 0)
+            {
+                Console.WriteLine("Du måste ange meddelande och namn");
+            }
+            else
+            {
+                SavePost();
+            }
+            //för att skapa en post. Här kontrolleras ifall all info är med.
+        }
+
+        static void SavePost()
+        {
+            Console.WriteLine("sparar meddelande");
+
+            //för att spara ner i binärt eller JSON 
+        }
+
+        static void DeletePost()
+        {
+            Console.WriteLine("TA BORT POST");
+            //för att radera en post 
+        }
+
+        static void GetPosts()
+        {
+            //hämtar posterna från där de är sparade 
         }
     }
 
-    static void CheckArgs(int option) 
-    {
-        if(option == 1)
-        {
-            CreatePost(); 
-        }
-        else if(option == 2)
-        {
-            DeletePost(); 
-        }
-    }
-
-    static void CreatePost()
-    {
-        Console.WriteLine("SKAPA POST");
-        Console.WriteLine("Skriv ditt meddelande här:"); 
-        string message = Console.ReadLine()!; 
-
-        Console.WriteLine("Skriv ditt namn här:"); 
-        string name = Console.ReadLine()!; 
-
-        if(message.Length == 0 || name.Length == 0)
-        {
-            Console.WriteLine("Du måste ange meddelande och namn"); 
-        }
-        else
-        {
-            SavePost(); 
-        }
-        //för att skapa en post. Här kontrolleras ifall all info är med.
-    } 
-
-    static void SavePost()
-    {
-        Console.WriteLine("sparar meddelande"); 
-        //för att spara ner i binärt eller JSON 
-    }
-
-    static void DeletePost()
-    {
-        Console.WriteLine("TA BORT POST"); 
-        //för att radera en post 
-    }
-
-    static void GetPosts() 
-    {
-        //hämtar posterna från där de är sparade 
-    }
-} 
-
-
+}

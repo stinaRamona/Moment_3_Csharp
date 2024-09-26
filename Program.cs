@@ -28,12 +28,12 @@ namespace GusetbookMessages
 {
     class Program
     {
+        //generell kod för programmet
         static void Main()
         {
             Console.WriteLine("Ange 1 för att skapa en post");
             Console.WriteLine("Ange 2 för att radera en post");
-            string args = Console.ReadLine()!;
-            //generell kod för programmet 
+            string args = Console.ReadLine()!; 
 
             if (args.Length > 0)
             {
@@ -47,6 +47,7 @@ namespace GusetbookMessages
             {
                 Console.WriteLine("Ange ett 1 för att skapa inlägg och 2 för att ta bort inlägg");
             }
+
         }
 
         static void CheckArgs(int option)
@@ -61,6 +62,7 @@ namespace GusetbookMessages
             }
         }
 
+        //för att skapa en post. Här kontrolleras ifall all info är med.
         static void CreatePost()
         {
             Console.WriteLine("SKAPA POST");
@@ -78,9 +80,10 @@ namespace GusetbookMessages
             {
                 SavePost(message, name);
             }
-            //för att skapa en post. Här kontrolleras ifall all info är med.
+            
         }
 
+        //för att spara ner i JSON
         static void SavePost(string message, string name)
         {
             Message myMessage = new Message(message, name); 
@@ -90,20 +93,25 @@ namespace GusetbookMessages
 
             string jsonMessage = JsonSerializer.Serialize<Message>(myMessage); 
 
-            Console.WriteLine(jsonMessage); //output är tom JSON sträng
+            //Console.WriteLine(jsonMessage);
 
-            //för att spara ner i binärt eller JSON 
+            //skickar med jsonMessage till GetPosts
+            GetPosts(jsonMessage); 
+
+             
         }
 
+        //för att radera en post
         static void DeletePost()
         {
             Console.WriteLine("TA BORT POST");
-            //för att radera en post 
+             
         }
 
-        static void GetPosts()
+        //hämtar posterna från där de är sparade
+        static void GetPosts(string jsonMessage)
         {
-            //hämtar posterna från där de är sparade 
+            Console.WriteLine(jsonMessage); 
         }
     }
 

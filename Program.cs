@@ -34,7 +34,7 @@ namespace GusetbookMessages
             Console.WriteLine("Ange 1 för att skapa en post");
             Console.WriteLine("Ange 2 för att radera en post");
             string args = Console.ReadLine()!; 
-
+            
             if (args.Length > 0)
             {
                 int option;
@@ -52,6 +52,7 @@ namespace GusetbookMessages
 
         static void CheckArgs(int option)
         {
+            
             if (option == 1)
             {
                 CreatePost();
@@ -88,12 +89,12 @@ namespace GusetbookMessages
         {
             Message myMessage = new Message(message, name); 
 
-            Console.WriteLine($"Meddelande: {myMessage.GuestMsg}");
-            Console.WriteLine($"Av:{myMessage.GuestName}"); 
+            //Console.WriteLine($"Meddelande: {myMessage.GuestMsg}");
+            //Console.WriteLine($"Av:{myMessage.GuestName}"); 
 
             string jsonMessage = JsonSerializer.Serialize<Message>(myMessage); 
 
-            //Console.WriteLine(jsonMessage);
+            Console.WriteLine(jsonMessage);
 
             //skickar med jsonMessage till GetPosts
             GetPosts(jsonMessage); 
@@ -111,7 +112,26 @@ namespace GusetbookMessages
         //hämtar posterna från där de är sparade
         static void GetPosts(string jsonMessage)
         {
+            Console.WriteLine("Mottagen JSON-sträng:");
             Console.WriteLine(jsonMessage); 
+
+            //för felsökning varför deserialisering inte fungerar 
+            try 
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    WriteIndented = true
+                };
+
+                Message savedMessage = JsonSerializer.Deserialize<Message>(jsonMessage)!; 
+                Console.WriteLine($"Meddelande: {savedMessage.GuestMsg}"); 
+                Console.WriteLine($"Av: {savedMessage.GuestName}");  
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Deserialiseringfel: {ex.Message}"); 
+            }
         }
     }
 

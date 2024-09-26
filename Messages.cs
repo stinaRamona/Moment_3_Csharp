@@ -15,5 +15,8 @@ namespace GusetbookMessages
             GuestMsg = msg; 
             GuestName = name; 
         }
+
+        //test ifall det funkar med deserialisering
+        public Message(){ }
     }
 }

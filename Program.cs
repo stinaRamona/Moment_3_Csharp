@@ -86,13 +86,14 @@ namespace GusetbookMessages
 
         //för att spara ner i JSON
         static void SavePost(string message, string name)
-        {
-            Message myMessage = new Message(message, name); 
+        {  
+            Message myMessage = new Message(message, name);
 
-            //Console.WriteLine($"Meddelande: {myMessage.GuestMsg}");
-            //Console.WriteLine($"Av:{myMessage.GuestName}"); 
+            var messages = new List<Message>(); 
 
-            string jsonMessage = JsonSerializer.Serialize<Message>(myMessage); 
+            messages.Add(myMessage); 
+
+            string jsonMessage = JsonSerializer.Serialize(messages); 
 
             Console.WriteLine(jsonMessage);
 
@@ -112,8 +113,7 @@ namespace GusetbookMessages
         //hämtar posterna från där de är sparade
         static void GetPosts(string jsonMessage)
         {
-            Console.WriteLine("Mottagen JSON-sträng:");
-            Console.WriteLine(jsonMessage); 
+
 
             //för felsökning varför deserialisering inte fungerar 
             try 
@@ -124,9 +124,13 @@ namespace GusetbookMessages
                     WriteIndented = true
                 };
 
-                Message savedMessage = JsonSerializer.Deserialize<Message>(jsonMessage)!; 
-                Console.WriteLine($"Meddelande: {savedMessage.GuestMsg}"); 
-                Console.WriteLine($"Av: {savedMessage.GuestName}");  
+                List<Message> messages = JsonSerializer.Deserialize<List<Message>>(jsonMessage)!;
+
+                foreach (var message in messages)
+                {
+                    Console.WriteLine($"{message.GuestMsg} - {message.GuestName}");       
+                }   
+
             } 
             catch (Exception ex)
             {

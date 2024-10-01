@@ -38,7 +38,7 @@ namespace GuestbookMessages
 
             while (true)
             {
-                Console.WriteLine("❤️ Stinas gästbok ❤️\n");
+                Console.WriteLine("📜 Stinas gästbok 📜\n");
                 Console.WriteLine("Ange 1 för att skapa en post");
                 Console.WriteLine("Ange 2 för att radera en post");
                 Console.WriteLine("Ange X för att avsluta programmet");
@@ -75,7 +75,7 @@ namespace GuestbookMessages
                         //Kod för att ta bort
                         Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
                         string index = Console.ReadLine()!;
-                        if (string.IsNullOrEmpty(index))
+                        if (!string.IsNullOrEmpty(index))
                             try
                             {
                                 guestbook.DeletePost(Convert.ToInt32(index)); //skickar till delete post i guestbook 

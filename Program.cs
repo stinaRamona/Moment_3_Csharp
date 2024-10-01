@@ -49,10 +49,10 @@ namespace GuestbookMessages
                     Console.WriteLine($"[{i++}] {message.GuestMsg} - {message.GuestName}"); //kommer fixas när Guestbook ordnas upp.
                 }
 
-                string key = Console.ReadLine()!;
+                int key = (int) Console.ReadKey(true).Key!;
                 switch (key)
                 {
-                    case "1":
+                    case '1':
                         //kod för att skapa
                         Console.WriteLine("SKAPA POST");
                         Console.WriteLine("Skriv ditt meddelande här:");
@@ -71,7 +71,7 @@ namespace GuestbookMessages
                         }
                         break;
 
-                    case "2":
+                    case '2':
                         //Kod för att ta bort
                         Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
                         string index = Console.ReadLine()!;
@@ -88,7 +88,7 @@ namespace GuestbookMessages
                             }
                         break;
 
-                    case "x":
+                    case 88:
                         //Kod för att avsluta programmet
                         Environment.Exit(0);
                         break;

@@ -1,7 +1,7 @@
 ﻿/*
 Moment 3 i Programmering i C#.NET, HT24, Mittuniversitetet 
 Kod skriven av Stina Persson stpe1901
-Senast uppdaterad 18/9 - 24
+Senast uppdaterad 01/10 - 24
 */
 
 /*
@@ -36,19 +36,23 @@ namespace GuestbookMessages
             GuestBook guestbook = new GuestBook();
             int i = 0;
 
+            //While-loop som gör att programmet körs tills det stängs ner 
             while (true)
-            {
+            {   
+                //Kommer står som meny när programmet startas
                 Console.WriteLine("📜 Stinas gästbok 📜\n");
                 Console.WriteLine("Ange 1 för att skapa en post");
                 Console.WriteLine("Ange 2 för att radera en post");
                 Console.WriteLine("Ange X för att avsluta programmet");
 
+                //Varje meddelande som finns i sparade i jsonfilen skrivs ut, tsm med index som börjar på noll 
                 i = 0;
                 foreach (Message message in guestbook.GetPosts())
                 {
-                    Console.WriteLine($"[{i++}] {message.GuestMsg} - {message.GuestName}"); //kommer fixas när Guestbook ordnas upp.
+                    Console.WriteLine($"[{i++}] {message.GuestMsg} - {message.GuestName}");
                 }
 
+                //För de olika alternativen: lägga till, ta bort stäng av. 
                 int key = (int) Console.ReadKey(true).Key!;
                 switch (key)
                 {
@@ -61,7 +65,7 @@ namespace GuestbookMessages
                         Console.WriteLine("Skriv ditt namn här:");
                         string name = Console.ReadLine()!;
 
-                        if (message.Length == 0 || name.Length == 0)
+                        if (message.Length == 0 || name.Length == 0) //kontrollerar innehåll 
                         {
                             Console.WriteLine("Du måste ange meddelande och namn");
                         }
@@ -75,12 +79,12 @@ namespace GuestbookMessages
                         //Kod för att ta bort
                         Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
                         string index = Console.ReadLine()!;
-                        if (!string.IsNullOrEmpty(index))
+                        if (!string.IsNullOrEmpty(index)) //om det finns innehåll fortsätter koden
                             try
                             {
                                 guestbook.DeletePost(Convert.ToInt32(index)); //skickar till delete post i guestbook 
                             }
-                            catch (Exception)
+                            catch (Exception) //ifall numret inte finns sparat fångas det upp här
                             {
                                 Console.WriteLine("Det nummret du anget är inget meddelande!");
                                 Console.WriteLine("Tryck på valfri tangent för att fortsätta");

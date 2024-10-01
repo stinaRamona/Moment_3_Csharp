@@ -23,6 +23,7 @@ Efter varje genomfört menyval ska skärmen skrivas om. Rensar konsollen och sen
 
 using System;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 namespace GuestbookMessages
@@ -53,10 +54,10 @@ namespace GuestbookMessages
                 }
 
                 //För de olika alternativen: lägga till, ta bort stäng av. 
-                int key = (int) Console.ReadKey(true).Key!;
+                string? key = Console.ReadLine()!;
                 switch (key)
                 {
-                    case '1':
+                    case "1":
                         //kod för att skapa
                         Console.WriteLine("SKAPA POST");
                         Console.WriteLine("Skriv ditt meddelande här:");
@@ -65,17 +66,20 @@ namespace GuestbookMessages
                         Console.WriteLine("Skriv ditt namn här:");
                         string name = Console.ReadLine()!;
 
-                        if (message.Length == 0 || name.Length == 0) //kontrollerar innehåll 
-                        {
-                            Console.WriteLine("Du måste ange meddelande och namn");
-                        }
-                        else
+                        if (!string.IsNullOrWhiteSpace(message) && !string.IsNullOrWhiteSpace(name)) //kontrollerar innehåll, även mellanslag
                         {
                             guestbook.AddPost(message, name); //kommer skickas till guestbook och läggas till där
                         }
+                        else
+                        {
+                            Console.WriteLine("Du måste ange meddelande och namn");
+                            Console.WriteLine("Tryck på valfri tangent för att fortsätta"); 
+                            Console.ReadKey(); 
+                        } 
+                        Console.Clear(); //rensar konsollen efter caset är slut
                         break;
 
-                    case '2':
+                    case "2":
                         //Kod för att ta bort
                         Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
                         string index = Console.ReadLine()!;
@@ -90,9 +94,10 @@ namespace GuestbookMessages
                                 Console.WriteLine("Tryck på valfri tangent för att fortsätta");
                                 Console.ReadKey();
                             }
+                            Console.Clear(); 
                         break;
 
-                    case 88:
+                    case "x":
                         //Kod för att avsluta programmet
                         Environment.Exit(0);
                         break;

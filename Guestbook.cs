@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 
-namespace GusetbookMessages
+namespace GuestbookMessages
 {
     public class GuestBook 
     {
@@ -20,7 +20,7 @@ namespace GusetbookMessages
             }
         }
         
-        public Message AddPost(string message, string name)
+        public void AddPost(string message, string name)
         {  
             Message post = new Message();
 
@@ -28,8 +28,7 @@ namespace GusetbookMessages
             post.GuestName = name; 
 
             messages.Add(post); 
-            marshal(); 
-            return messages; //varför rött?    
+            marshal();  //returnerar nu ingenting    
         }
 
         public int DeletePost(int index)

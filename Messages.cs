@@ -2,7 +2,7 @@
 Fil för classen message.
 */
 
-namespace GusetbookMessages
+namespace GuestbookMessages
 {
     //Definition av klassen
     public class Message

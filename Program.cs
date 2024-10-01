@@ -25,7 +25,7 @@ using System;
 using System.ComponentModel;
 using System.Text.Json;
 
-namespace GusetbookMessages
+namespace GuestbookMessages
 {
     class Program
     {
@@ -46,13 +46,13 @@ namespace GusetbookMessages
                 i = 0;
                 foreach (Message message in guestbook.GetPosts())
                 {
-                    Console.WriteLine($"[{i++}] {guestbook.GuestMsg} - {guestbook.GuestName}"); //kommer fixas när Guestbook ordnas upp.
+                    Console.WriteLine($"[{i++}] {message.GuestMsg} - {message.GuestName}"); //kommer fixas när Guestbook ordnas upp.
                 }
 
-                int key = (int)Console.ReadKey(true).Key;
+                string key = Console.ReadLine()!;
                 switch (key)
                 {
-                    case '1':
+                    case "1":
                         //kod för att skapa
                         Console.WriteLine("SKAPA POST");
                         Console.WriteLine("Skriv ditt meddelande här:");
@@ -67,11 +67,11 @@ namespace GusetbookMessages
                         }
                         else
                         {
-                            AddPost(message, name); //kommer skickas till guestbook och läggas till där
+                            guestbook.AddPost(message, name); //kommer skickas till guestbook och läggas till där
                         }
                         break;
 
-                    case '2':
+                    case "2":
                         //Kod för att ta bort
                         Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
                         string index = Console.ReadLine()!;
@@ -88,7 +88,7 @@ namespace GusetbookMessages
                             }
                         break;
 
-                    case 88:
+                    case "x":
                         //Kod för att avsluta programmet
                         Environment.Exit(0);
                         break;

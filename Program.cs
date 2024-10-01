@@ -22,6 +22,7 @@ Efter varje genomfört menyval ska skärmen skrivas om. Rensar konsollen och sen
 */
 
 using System;
+using System.ComponentModel;
 using System.Text.Json;
 
 namespace GusetbookMessages
@@ -31,112 +32,68 @@ namespace GusetbookMessages
         //generell kod för programmet
         static void Main()
         {
-            Console.WriteLine("Ange 1 för att skapa en post");
-            Console.WriteLine("Ange 2 för att radera en post");
-            string args = Console.ReadLine()!; 
-            
-            if (args.Length > 0)
+            //Förbereder variabel för listan samt construktor för gästboken 
+            GuestBook guestbook = new GuestBook();
+            int i = 0;
+
+            while (true)
             {
-                int option;
-                if (int.TryParse(args, out option))
+                Console.WriteLine("❤️ Stinas gästbok ❤️\n");
+                Console.WriteLine("Ange 1 för att skapa en post");
+                Console.WriteLine("Ange 2 för att radera en post");
+                Console.WriteLine("Ange X för att avsluta programmet");
+
+                i = 0;
+                foreach (Message message in guestbook.GetPosts())
                 {
-                    CheckArgs(option);
+                    Console.WriteLine($"[{i++}] {guestbook.GuestMsg} - {guestbook.GuestName}"); //kommer fixas när Guestbook ordnas upp.
                 }
-            }
-            else
-            {
-                Console.WriteLine("Ange ett 1 för att skapa inlägg och 2 för att ta bort inlägg");
-            }
 
-        }
-
-        static void CheckArgs(int option)
-        {
-            
-            if (option == 1)
-            {
-                CreatePost();
-            }
-            else if (option == 2)
-            {
-                DeletePost();
-            }
-        }
-
-        //för att skapa en post. Här kontrolleras ifall all info är med.
-        static void CreatePost()
-        {
-            Console.WriteLine("SKAPA POST");
-            Console.WriteLine("Skriv ditt meddelande här:");
-            string message = Console.ReadLine()!;
-
-            Console.WriteLine("Skriv ditt namn här:");
-            string name = Console.ReadLine()!;
-
-            if (message.Length == 0 || name.Length == 0)
-            {
-                Console.WriteLine("Du måste ange meddelande och namn");
-            }
-            else
-            {
-                SavePost(message, name);
-            }
-            
-        }
-
-        //för att spara ner i JSON
-        static void SavePost(string message, string name)
-        {  
-            Message myMessage = new Message(message, name);
-
-            var messages = new List<Message>(); 
-
-            messages.Add(myMessage); 
-
-            string jsonMessage = JsonSerializer.Serialize(messages); 
-
-            Console.WriteLine(jsonMessage);
-
-            //skickar med jsonMessage till GetPosts
-            GetPosts(jsonMessage); 
-
-             
-        }
-
-        //för att radera en post
-        static void DeletePost()
-        {
-            Console.WriteLine("TA BORT POST");
-             
-        }
-
-        //hämtar posterna från där de är sparade
-        static void GetPosts(string jsonMessage)
-        {
-
-
-            //för felsökning varför deserialisering inte fungerar 
-            try 
-            {
-                JsonSerializerOptions options = new JsonSerializerOptions
+                int key = (int)Console.ReadKey(true).Key;
+                switch (key)
                 {
-                    PropertyNameCaseInsensitive = true,
-                    WriteIndented = true
-                };
+                    case '1':
+                        //kod för att skapa
+                        Console.WriteLine("SKAPA POST");
+                        Console.WriteLine("Skriv ditt meddelande här:");
+                        string message = Console.ReadLine()!;
 
-                List<Message> messages = JsonSerializer.Deserialize<List<Message>>(jsonMessage)!;
+                        Console.WriteLine("Skriv ditt namn här:");
+                        string name = Console.ReadLine()!;
 
-                foreach (var message in messages)
-                {
-                    Console.WriteLine($"{message.GuestMsg} - {message.GuestName}");       
-                }   
+                        if (message.Length == 0 || name.Length == 0)
+                        {
+                            Console.WriteLine("Du måste ange meddelande och namn");
+                        }
+                        else
+                        {
+                            AddPost(message, name); //kommer skickas till guestbook och läggas till där
+                        }
+                        break;
 
-            } 
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Deserialiseringfel: {ex.Message}"); 
+                    case '2':
+                        //Kod för att ta bort
+                        Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
+                        string index = Console.ReadLine()!;
+                        if (string.IsNullOrEmpty(index))
+                            try
+                            {
+                                guestbook.DeletePost(Convert.ToInt32(index)); //skickar till delete post i guestbook 
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Det nummret du anget är inget meddelande!");
+                                Console.WriteLine("Tryck på valfri tangent för att fortsätta");
+                                Console.ReadKey();
+                            }
+                        break;
+
+                    case 88:
+                        //Kod för att avsluta programmet
+                        Environment.Exit(0);
+                        break;
+                }
             }
         }
     }
-
 }

@@ -60,6 +60,7 @@ namespace GuestbookMessages
                 switch (key)
                 {
                     case "1":
+                        Console.Clear(); 
                         //kod för att skapa
                         Console.WriteLine("SKAPA POST");
                         Console.WriteLine("Skriv ditt meddelande här:");
@@ -81,6 +82,7 @@ namespace GuestbookMessages
                         break;
 
                     case "2":
+                        Console.Clear(); 
                         //Kod för att ta bort
                         Console.WriteLine("Skriv nummret på meddelandet du vill radera:");
                         string index = Console.ReadLine()!;

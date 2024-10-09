@@ -40,6 +40,8 @@ namespace GuestbookMessages
             //While-loop som gör att programmet körs tills det stängs ner 
             while (true)
             {   
+                Console.Clear(); //konsollen rensas vid omstart av programmet eller nytt menyval 
+
                 //Kommer står som meny när programmet startas
                 Console.WriteLine("📜 Stinas gästbok 📜\n");
                 Console.WriteLine("Ange 1 för att skapa en post");
@@ -76,7 +78,6 @@ namespace GuestbookMessages
                             Console.WriteLine("Tryck på valfri tangent för att fortsätta"); 
                             Console.ReadKey(); 
                         } 
-                        Console.Clear(); //rensar konsollen efter caset är slut
                         break;
 
                     case "2":
@@ -93,12 +94,13 @@ namespace GuestbookMessages
                                 Console.WriteLine("Det nummret du anget är inget meddelande!");
                                 Console.WriteLine("Tryck på valfri tangent för att fortsätta");
                                 Console.ReadKey();
-                            }
-                            Console.Clear(); 
+                            } 
                         break;
 
                     case "x":
                         //Kod för att avsluta programmet
+                        Console.Clear(); //rensar konsollen innan avslut av programmet
+
                         Environment.Exit(0);
                         break;
                 }
